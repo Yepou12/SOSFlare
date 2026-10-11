@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+:root {
+  --background: #e2ebef;
+  --foreground: #0e2a3c;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #06161f;
+    --foreground: #e6f0f4;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: #0e2a3c;
+  --color-navy: #123249;
+  --color-navy-edge: #091e2d;
+  --color-orange: #ff6a2b;
+  --color-orange-edge: #bf3f0c;
+  --color-tile: #f5f8f6;
+  --color-tile-edge: #a5b9c4;
+  --color-gold: #ffcb2e;
+  --color-gold-edge: #c9940a;
+  --font-sans: var(--font-nunito), Nunito, sans-serif;
+  --font-body: var(--font-nunito), Nunito, sans-serif;
+  --font-display: var(--font-lilita), "Lilita One", sans-serif;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: #ffcb2e;
+  color: #0e2a3c;
+}
+
+:focus-visible {
+  outline: 3px solid #ff6a2b;
+  outline-offset: 3px;
+}
+
+@keyframes tile-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tile-pop {
+  animation: tile-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.pressable {
+  box-shadow: 0 6px 0 #bf3f0c;
+}
+
+.pressable:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pressable:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #bf3f0c;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-pop {
+    animation: none;
+  }
+}
